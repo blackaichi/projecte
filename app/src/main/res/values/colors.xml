@@ -7,4 +7,7 @@
     <color name="LightGrey">#D3D3D3</color>
     <color name="Orange">#FFA500</color>
     <color name="Black">#000000</color>
+    <color name="Blue">#0000FF</color>
+    <color name="Yellow">#FFFF00</color>
+    <color name="DarkSeaGreen">#8FBC8F</color>
 </resources>

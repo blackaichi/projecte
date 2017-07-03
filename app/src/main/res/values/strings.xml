@@ -24,9 +24,15 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="settings">Settings</string>
     <string name="calculadora">Calculadora</string>
-    <string name="menu">Menu</string>
+    <string name="menu">Escull una opcio casper</string>
     <string name="activity2">Activity2</string>
     <string name="activity3">Activity3</string>
     <string name="Titol_menu">Ei que pasa xavaleh</string>
     <string name="Subtitol_menu">Todo bien todo correcto</string>
+    <string name="diventre0">\nEm quedaré aqui per recordar-te lo tonto que ets per haver dividit entre 0, i resa perquè ningú més llegeixi aquesta notificació i es rigui de la teva inutilitat jajajajajajajajajajajajajajajajajajajajajajajajajajajajaja\n\n</string>
+    <string name="mode_notificaci">Mode Notificació</string>
+    <string name="toast">Toast</string>
+    <string name="estat">Estat</string>
+    <string name="trucar">trucar</string>
+    <string name="obrir_navegador">Obrir navegador</string>
 </resources>
