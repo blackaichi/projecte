@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name=".LogReg.Login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,16 @@
         <activity
             android:name=".Calculadora"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Calculadora_Horizontal"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Memory"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LogReg.Register"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Data.Vars"></activity>
     </application>
 
 </manifest>

@@ -35,4 +35,27 @@
     <string name="estat">Estat</string>
     <string name="trucar">trucar</string>
     <string name="obrir_navegador">Obrir navegador</string>
+    <string name="delm1">delM1</string>
+    <string name="addm1">addM1</string>
+    <string name="addm2">addm2</string>
+    <string name="delm2">delm2</string>
+    <string name="delmem">delmem</string>
+    <string name="m1">m1</string>
+    <string name="m2">m2</string>
+    <string name="pi">π</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="addm3">addm3</string>
+    <string name="delm3">delm3</string>
+    <string name="m3">m3</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="noEsticRegistrat">Not a member? Sign up now.</string>
+    <string name="name">name</string>
+    <string name="register">REGISTER</string>
+    <string name="jaEsticRegistrat">Already registred! Login Me.</string>
+    <string name="repeat_password">Repeat Password</string>
 </resources>
