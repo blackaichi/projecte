@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/bad_login"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/tornarlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tornar_al_login"
+        android:background="@color/Red"
+        android:textColor="@color/White"/>
+</LinearLayout>

@@ -21,6 +21,9 @@ import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.projectefinal.blackaichi.projectefinal.Data.Vars;
+import com.projectefinal.blackaichi.projectefinal.LogReg.Login;
+
 public class Calculadora extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "main";
@@ -37,14 +40,52 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
     boolean _toast, portrait;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item11:
+                _toast = true;
+                break;
+            case R.id.item12:
+                _toast = false;
+                break;
+            case R.id.item2:
+                Intent trucar;
+                if (texto.getText().toString().equals("0"))
+                    trucar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"));
+                else
+                    trucar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + texto.getText().toString()));
+                startActivity(trucar);
+                break;
+            case R.id.item3:
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.cat/"));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setPackage("com.android.chrome");
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException ex) {
+                    intent.setPackage(null);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.logout:
+                Vars.loged = false;
+                Vars.thisuser = "";
+                Intent i = new Intent(getApplicationContext(), Login.class);
+                startActivity(i);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
-        Log.v(TAG,"Se ha llamado onSaveInstanceState");
-        outState.putDouble("resultado",resultat);
-        outState.putDouble("mem1",mem1);
-        outState.putDouble("mem2",mem2);
-        outState.putDouble("mem3",mem3);
+        Log.v(TAG, "Se ha llamado onSaveInstanceState");
+        outState.putDouble("resultado", resultat);
+        outState.putDouble("mem1", mem1);
+        outState.putDouble("mem2", mem2);
+        outState.putDouble("mem3", mem3);
         outState.putBoolean("toast", _toast);
         outState.putString("texto", texto.getText().toString());
         outState.putString("resultat", result.getText().toString());
@@ -96,7 +137,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_right,menu);
+        getMenuInflater().inflate(R.menu.menu_right, menu);
         return true;
     }
 
@@ -115,13 +156,13 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
             if (n == aux.length()) return false;
             Log.v(TAG, "3r");
             ++n;
-            ultim = aux.substring(aux.length() - n, aux.length() - n+1);
+            ultim = aux.substring(aux.length() - n, aux.length() - n + 1);
         }
         return true;
     }
 
     private boolean operacio_repetida(String text) {
-        return operacio(control) && operacio(text) || (texto.getText().toString().length() == 2 && operacio(texto.getText().toString().substring(0,1)))&& operacio(text);
+        return operacio(control) && operacio(text) || (texto.getText().toString().length() == 2 && operacio(texto.getText().toString().substring(0, 1))) && operacio(text);
     }
 
     private void setText(String text) {
@@ -140,8 +181,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
                     calculaaux3(texto.getText().toString());
                     texto.setText(text + " ");
                 }
-            }
-            else if (operacio_repetida(text)) texto.setText(text + " ");
+            } else if (operacio_repetida(text)) texto.setText(text + " ");
         }
         if (texto.getText().toString().equals(".")) texto.setText("0.");
     }
@@ -163,14 +203,15 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
         String s;
         switch (n) {
             case 1:
-            if (operacio(texto.getText().toString().substring(0, 1))) {
-                texto.setText(texto.getText().toString() + String.valueOf(resultat));
-            } else {
-                s = String.valueOf(resultat);
-                if (s.substring(s.length() -2).equals(".0")) s = s.substring(0, s.length() - 2);
-                texto.setText(s);
-            }
-            calcula(texto.getText().toString());
+                if (operacio(texto.getText().toString().substring(0, 1))) {
+                    texto.setText(texto.getText().toString() + String.valueOf(resultat));
+                } else {
+                    s = String.valueOf(resultat);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
+                    texto.setText(s);
+                }
+                calcula(texto.getText().toString());
                 break;
             case 2:
                 if (operacio(texto.getText().toString().substring(0, 1))) {
@@ -178,7 +219,8 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
                 } else {
                     s = String.valueOf(mem1);
                     Log.v(TAG, s);
-                    if (s.substring(s.length() -2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     Log.v(TAG, s);
                     texto.setText(s);
                 }
@@ -189,7 +231,8 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
                     texto.setText(texto.getText().toString() + String.valueOf(mem2));
                 } else {
                     s = String.valueOf(mem2);
-                    if (s.substring(s.length() -2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     texto.setText(s);
                 }
                 calcula(texto.getText().toString());
@@ -199,7 +242,8 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
                     texto.setText(texto.getText().toString() + String.valueOf(mem3));
                 } else {
                     s = String.valueOf(mem3);
-                    if (s.substring(s.length() -2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     texto.setText(s);
                 }
                 calcula(texto.getText().toString());
@@ -212,8 +256,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
         if (portrait) {
             result.setTextColor(Color.parseColor("#4682B4"));
             result.setTextSize(70);
-        }
-        else {
+        } else {
             result.setTextColor(Color.parseColor("#4682B4"));
             result.setTextSize(35);
         }
@@ -224,8 +267,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
             s = String.valueOf(resultat);
             if (s.substring(s.length() - 2).equals(".0")) s = s.substring(0, s.length() - 2);
             result.setText(s);
-        }
-        else {
+        } else {
             result.setText("k ets casper o k?");
             stickynot();
         }
@@ -262,8 +304,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
     private void calculaaux3(String num) {
         if (aux3.getText().toString().equals(getString(R.string.buit))) {
             aux3.setText(num);
-        }
-        else {
+        } else {
             aux = num.substring(0, 1);
             num = num.substring(2, num.length());
             switch (aux) {
@@ -292,22 +333,26 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
             switch (aux) {
                 case "+":
                     s = String.valueOf(Double.parseDouble(aux3.getText().toString()) + Double.parseDouble(num));
-                    if (s.substring(s.length() - 2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     result.setText(s);
                     break;
                 case "-":
                     s = String.valueOf(Double.parseDouble(aux3.getText().toString()) - Double.parseDouble(num));
-                    if (s.substring(s.length() - 2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     result.setText(s);
                     break;
                 case "*":
                     s = String.valueOf(Double.parseDouble(aux3.getText().toString()) * Double.parseDouble(num));
-                    if (s.substring(s.length() - 2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     result.setText(s);
                     break;
                 case "÷":
                     s = String.valueOf(Double.parseDouble(aux3.getText().toString()) / Double.parseDouble(num));
-                    if (s.substring(s.length() - 2).equals(".0")) s = s.substring(0, s.length() - 2);
+                    if (s.substring(s.length() - 2).equals(".0"))
+                        s = s.substring(0, s.length() - 2);
                     result.setText(s);
                     break;
             }
@@ -348,9 +393,9 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
         horizontalScrollView1 = (HorizontalScrollView) findViewById(R.id.horizontalscreenview1);
         horizontalScrollView2 = (HorizontalScrollView) findViewById(R.id.horizontalscreenview2);
         horizontalScrollView3 = (HorizontalScrollView) findViewById(R.id.horizontalscreenview3);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Calculadora");
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);*/
         if (!portrait) {
             plusmem1 = (Button) findViewById(R.id.plusmem1);
             plusmem2 = (Button) findViewById(R.id.plusmem2);
@@ -403,8 +448,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected int whatIsMyId() {
-        if (portrait) return R.layout.activity_calculadora;
-        return R.layout.activity_calculadora__horizontal;
+        return R.id.activity1;
     }
 
     @Override
@@ -412,8 +456,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
         if (portrait) {
             result.setTextSize(50);
             result.setTextColor(Color.parseColor("#000000"));
-        }
-        else {
+        } else {
             result.setTextSize(30);
             result.setTextColor(Color.parseColor("#000000"));
         }
@@ -470,15 +513,14 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
                 if (texto.getText().toString().length() == 1) {
                     if (texto.getText().toString().equals("0")) {
                         if (_toast) toastnoti("No puc borrar un 0 inutil!!");
-                        else statenoti("No puc borrar un 0 inutil!!",5);
+                        else statenoti("No puc borrar un 0 inutil!!", 5);
                     }
                     texto.setText(getString(R.string.button0));
                     result.setText(getString(R.string.button0));
                 } else if (texto.getText().toString().substring(texto.getText().toString().length() - 1).equals(" ")) {
                     if (_toast) toastnoti("No puc borrar mes :/");
-                    else statenoti("No puc borrar mes :/",4);
-                }
-                else {
+                    else statenoti("No puc borrar mes :/", 4);
+                } else {
                     texto.setText(texto.getText().toString().substring(0, texto.getText().toString().length() - 1));
                     if (!texto.getText().toString().substring(texto.getText().toString().length() - 1).equals(" "))
                         calcula(texto.getText().toString());
@@ -487,7 +529,7 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
             case R.id.buttonAC:
                 if (texto.getText().toString().equals("0") && result.getText().toString().equals("0")) {
                     if (_toast) toastnoti("No puc borrar res més caraensaladilla");
-                    else statenoti("No puc borrar res més caraensaladilla",3);
+                    else statenoti("No puc borrar res més caraensaladilla", 3);
                 }
                 texto.setText(getString(R.string.button0));
                 aux3.setText(getString(R.string.buit));
@@ -551,32 +593,5 @@ public class Calculadora extends BaseActivity implements View.OnClickListener {
                     break;
             }
         }
-    }
-
-    public void trucar(MenuItem item) {
-        Intent trucar;
-        if (texto.getText().toString().equals("0")) trucar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"));
-        else trucar = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + texto.getText().toString()));
-        startActivity(trucar);
-    }
-
-    public void navegador(MenuItem item) {
-        Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.google.cat/"));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setPackage("com.android.chrome");
-        try {
-            startActivity(intent);
-        } catch (ActivityNotFoundException ex) {
-            intent.setPackage(null);
-            startActivity(intent);
-        }
-    }
-
-    public void booltrue(MenuItem item) {
-        _toast = true;
-    }
-
-    public void boolfals(MenuItem item) {
-        _toast = false;
     }
 }

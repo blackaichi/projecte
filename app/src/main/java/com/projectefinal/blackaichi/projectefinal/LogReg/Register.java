@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.projectefinal.blackaichi.projectefinal.Data.DataBase;
+import com.projectefinal.blackaichi.projectefinal.Data.Vars;
 import com.projectefinal.blackaichi.projectefinal.MainActivity;
 import com.projectefinal.blackaichi.projectefinal.R;
 
@@ -22,7 +23,6 @@ public class Register extends AppCompatActivity {
     EditText repeatnewpass;
     DataBase db;
     public static final String TAG = "main activity";
-    Toast toast;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class Register extends AppCompatActivity {
                 if (!username.isEmpty() && !password.isEmpty() && !repeatpassword.isEmpty()) {
                     Log.v(TAG, "he afegit algu a la bd");
                     if (password.equals(repeatpassword)) {
-                        db.createuserpass(username, password, repeatpassword);
+                        db.createuserpass(username, password);
                         Intent intent = new Intent(getApplicationContext(), Login.class);
                         startActivity(intent);
                         finish();
@@ -68,11 +68,11 @@ public class Register extends AppCompatActivity {
             }
 
             private void toast(String s) {
-                if (toast != null) {
-                    toast.cancel();
+                if (Vars.toast != null) {
+                    Vars.toast.cancel();
                 }
-                toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
-                toast.show();
+                Vars.toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
+                Vars.toast.show();
             }
         });
 

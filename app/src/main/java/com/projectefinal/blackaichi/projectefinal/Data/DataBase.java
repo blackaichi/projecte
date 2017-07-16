@@ -5,22 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DataBase extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
 
-    //Declaracion global de la version de la base de datos
     public static final String DATABASE_NAME = "USER-PASS";
 
-    //Declaracion del nombre de la tabla
     public static final String TABLE ="Usernames";
 
-    //sentencia global de cracion de la base de datos
     public static final String KEY_user = "user";
     public static final String KEY_pass = "pass";
-    private static final String TAG = "main activity";
 
 
     public DataBase(Context context) {
@@ -29,7 +24,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String AddLogin = "CREATE TABLE " + TABLE + "(" + KEY_user + " TEXT, " + KEY_pass + " TEXT)";
+        String AddLogin = "CREATE TABLE " + TABLE + " (" + KEY_user + " TEXT PRIMARY KEY, " + KEY_pass + " TEXT)";
         db.execSQL(AddLogin);
     }
 
@@ -39,17 +34,13 @@ public class DataBase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void createuserpass(String user, String pass, String reppass) {
-        Log.v(TAG, "he afegit algu a la bd");
+    public void createuserpass(String user, String pass) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.v(TAG, "he afegit algu a la bd");
         ContentValues values = new ContentValues();
         values.put(KEY_user, user);
         values.put(KEY_pass, pass);
-        Log.v(TAG, "he afegit algu a la bd");
         db.insert(TABLE, null, values);
         db.close();
-        Log.v(TAG, "he afegit algu a la bd");
     }
 
     public boolean checklogin(String user, String pass) {

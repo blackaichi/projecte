@@ -26,11 +26,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Memory"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LogReg.Register"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Data.Vars"></activity>
+        <activity android:name=".Data.Vars" />
+        <activity android:name=".LogReg.Bad_Login" />
+        <activity android:name=".show_ranking" />
+        <activity android:name=".Reproductor"></activity>
     </application>
 
 </manifest>

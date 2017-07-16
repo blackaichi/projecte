@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.projectefinal.blackaichi.projectefinal.Data.DataBase;
+import com.projectefinal.blackaichi.projectefinal.Data.Vars;
 import com.projectefinal.blackaichi.projectefinal.MainActivity;
 import com.projectefinal.blackaichi.projectefinal.R;
 
@@ -21,7 +22,6 @@ public class Login extends AppCompatActivity {
     EditText User;
     EditText Pass;
     DataBase db;
-    Toast toast;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,12 +49,16 @@ public class Login extends AppCompatActivity {
 
                 if (!user.isEmpty() && !pass.isEmpty()) {
                     if (db.checklogin(user, pass)) {
+                        Vars.loged = true;
+                        Vars.thisuser = user;
                         Intent i = new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(i);
                         finish();
                     }
                     else {
                         toast("XEEEEEIICCCC si t'has equivocat vale, sino registrat o alpargata el la frente");
+                        Intent i = new Intent(getApplicationContext(),Bad_Login.class);
+                        startActivity(i);
                     }
                 } else {
                     toast("Pa mi que no has omplert res amigo");
@@ -74,20 +78,14 @@ public class Login extends AppCompatActivity {
     }
 
     private void toast(String s) {
-        if (toast != null) {
-            toast.cancel();
+        if (Vars.toast != null) {
+            Vars.toast.cancel();
         }
-        toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
-        toast.show();
+        Vars.toast = Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
+        Vars.toast.show();
     }
 
     public static boolean isLoggedIn() {
-        return false;
-    }
-
-    public void ei(View view) {
-        Intent i = new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(i);
-        finish();
+        return Vars.loged;
     }
 }

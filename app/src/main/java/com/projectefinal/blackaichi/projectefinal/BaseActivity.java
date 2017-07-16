@@ -24,7 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     {
         m = new ArrayMap<>();
         m.put(R.id.activity1, Calculadora.class);
-
+        m.put(R.id.activity2, Memory.class);
+        m.put(R.id.activity3, Reproductor.class);
     }
 
     @Override
@@ -62,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         };
 
 
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
 
         toggle.syncState();
 
@@ -81,6 +82,18 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         final int id = item.getItemId();
         if(id != whatIsMyId()){
             switch (id){
+                case R.id.activity1:
+                    startActivity(new Intent(getApplicationContext(),m.get(id)));
+                    setTitle("calculadora");
+                    break;
+                case R.id.activity2:
+                    startActivity(new Intent(getApplicationContext(),m.get(id)));
+                    setTitle("Memory");
+                    break;
+                case R.id.activity3:
+                    startActivity(new Intent(getApplicationContext(),m.get(id)));
+                    setTitle("Reproductor");
+                    break;
                 default:
                     startActivity(new Intent(getApplicationContext(),m.get(id)));
                     break;
@@ -104,4 +117,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         super.setContentView(fullLayout);
         setView();
     }
+
+
 }
