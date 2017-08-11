@@ -16,7 +16,6 @@ public class Reproductor extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_reproductor);
 
         //Sento que el reproductor sigui tant cutre pero no he tingut gaire temps...
-
         m = new MediaPlayer();
         m = MediaPlayer.create(this, R.raw.musica);
 
